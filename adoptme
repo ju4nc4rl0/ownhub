@@ -1,0 +1,38 @@
+-- if game.PlaceId == 920587237 then
+local Pet_List = {}
+
+for i, v in pairs(require(ReplicatedStorage.ClientModules.Core.ClientData).get_data()[Player.Name].inventory.pets) do
+    local key = tostring(v["id"]) .. " - " .. tostring(v["properties"]["age"]) .. " years old"
+    if not table.find(List, Key) and v.kind ~= "practice_dog" then
+        PetsShow[key] = v
+        table.insert(Pet_List, key)
+        table.sort(Pet_List)
+    end
+end
+
+
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "GUI",
+   LoadingTitle = "ROBLOX pa more",
+   LoadingSubtitle = "by Chilaklak",
+})
+
+local Tabs = {
+    MainTab = Window:CreateTab("Autofarm", nil)
+}
+
+	-- start of selecting pet to farm
+    local Dropdown = Tabs.MainTab:AddDropdown("d", {
+        Title = "Pet to Farm:",
+        Values = Pet_List, -- setting the list of pets
+        Multi = false,
+        Default = 1,
+    })
+    Dropdown:SetValue(nil) -- setting initial value of the dropdown
+
+    Dropdown:OnChanged(function(Value)
+        Key = PetsShow[Value]
+    end)
+	-- end of selecting pet to farm
